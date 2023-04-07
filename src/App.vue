@@ -1,17 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <Indecision />
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <!-- Componentes recibiendo una prop de titulo   -->
-  <Counter title="Entraron" :start="10"/>
+  <!-- <Counter title="Entraron" :start="10"/> -->
 
 </template>
 
 <script>
-import Counter from '@/components/Counter.vue'
+// import Counter from '@/components/Counter.vue'
+import Indecision from './components/Indecision.vue';
 
 export default {
   name: 'App',
   components: {
-    Counter
+    // Counter
+    Indecision
   }
 }
 </script>
