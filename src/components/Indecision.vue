@@ -5,8 +5,8 @@
     <input type="text" placeholder="Hazme una pregunta" v-model="question" />
     <p class="reminder">Recuerda terminar con un signo de interrogacion (?)</p>
     <div v-if="isValidQuestion">
-      <h2>{{question}}</h2>
-      <h1>{{answer}}</h1>
+      <h2>{{ question }}</h2>
+      <h1>{{ answer }}</h1>
     </div>
   </div>
 </template>
@@ -19,29 +19,37 @@ export default {
       question: null,
       answer: null,
       img: null,
-      isValidQuestion: false
-    }
+      isValidQuestion: false,
+    };
   },
   methods: {
     async getAnswer() {
-        this.answer = "Pensando..."
-        const {answer, image} = await fetch("https://yesno.wtf/api")
-            .then(res => res.json())
-        
-        this.answer = answer === 'yes' ? 'Si!' : 'No!'
-        this.img = image
-    }
+      try {
+        this.answer = "Pensando...";
+        const { answer, image } = await fetch("https://yesno.wtf/api").then(
+          (res) => res.json()
+        );
+
+        this.answer = answer === "yes" ? "Si!" : "No!";
+        this.img = image;
+      } catch (error) {
+        this.answer = "No se pudo cargar de la API!"
+        this.img = null
+
+        console.log(error)
+      }
+    },
   },
 
   watch: {
     question(value) {
-        this.isValidQuestion = false
-        console.log({value})
-        if (!value.includes("?")) return
-        this.isValidQuestion = true
-        this.getAnswer()
-    }
-  }
+      this.isValidQuestion = false;
+      console.log({ value });
+      if (!value.includes("?")) return;
+      this.isValidQuestion = true;
+      this.getAnswer();
+    },
+  },
 };
 </script>
 
